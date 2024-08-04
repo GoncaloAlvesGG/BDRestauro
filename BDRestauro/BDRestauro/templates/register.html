@@ -1,0 +1,54 @@
+{% extends 'base_auth.html' %}
+
+{% block content %}
+<h2 class="text-center">Registar</h2>
+<form method="post">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-sm">
+            <label for="primeiro_nome" class="form-label">Primeiro Nome</label>
+            <input type="text" class="form-control" id="primeiro_nome" name="primeiro_nome" required>
+        </div>
+
+        <div class="col-sm">
+            <label for="ultimo_nome" class="form-label">Ultimo Nome</label>
+            <input type="text" class="form-control" id="ultimo_nome" name="ultimo_nome" required>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+
+        <div class="col-sm">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm">
+            <label for="telemovel" class="form-label">Telemovel</label>
+            <input type="text" class="form-control" id="telemovel" name="telemovel" required>
+        </div>
+
+        <div class="col-sm">
+            <label for="nif" class="form-label">NIF (Opcional)</label>
+            <input type="text" class="form-control" id="nif" name="nif">
+
+        </div>
+    </div>
+    <br>
+    <div class="mb-3">
+        <label for="morada" class="form-label">Morada</label>
+        <input type="text" class="form-control" id="morada" name="morada" required>
+    </div>
+
+
+    <div class="d-flex justify-content-center w-100">
+        <button type="submit" class="btn btn-primary btn-lg">Registar</button>
+    </div>
+</form>
+{% endblock %}
