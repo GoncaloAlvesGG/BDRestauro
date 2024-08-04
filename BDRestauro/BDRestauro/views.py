@@ -1,22 +1,66 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .utils import *
+import sweetify
 
 def index(request):
     return render(request, 'index.html')
 
 def tabela_users(request):
-    utilizadores = listar_utilizadores(1),
-    return render(
-        request,
-        "lista_utilizadores.html",
-        {"utilizadores": utilizadores[0]},
+    if request.session.get('id_utilizador') is not None and request.session.get('admin') is True:
+        utilizadores = listar_utilizadores(request.session.get('id_utilizador')),
+        return render(
+            request,
+            "lista_utilizadores.html",
+            {"utilizadores": utilizadores[0]},
     )
+    else:
+        messages.error(request, 'Não tem permissões para aceder a essa página!')
+        return redirect(request.META.get('HTTP_REFERER', '/'))
+
 
 def register(request):
-    return render(request,
-        "register.html",
-    )
+    if request.method == 'POST':
+        return register_user(request)
+    else:
+        return render(request, 'register.html')
+
+def register_user(request):
+    from django.shortcuts import render
+    if request.method == 'POST':
+        primeiro_nome = request.POST['primeiro_nome']
+        ultimo_nome = request.POST['ultimo_nome']
+        email = request.POST['email']
+        password = request.POST['password']
+        morada = request.POST['morada']
+        telemovel = request.POST['telemovel']
+        nif = request.POST.get('nif', None)  # Optional field
+        admin = False
+
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute("""
+                    CALL add_utilizador_proc(%s, %s, %s, %s, %s, %s, %s, %s)
+                """, [
+                    primeiro_nome,
+                    ultimo_nome,
+                    email,
+                    password,
+                    morada,
+                    telemovel,
+                    admin,
+                    nif
+                ])
+                messages.success(request, 'Registado com sucesso! Por favor autentique-se!')
+                return redirect('login')
+        except Exception as e:
+            if 'O email já existe' in str(e):
+                messages.error(request, 'O email já se encontra em uso!')
+            else:
+                messages.error(request, f'Erro a adicionar o utilizador: {str(e)}')
+
+    return redirect('register')
+
 
 def login_user(request):
     if request.method == "POST":
@@ -66,4 +110,5 @@ def principal(request):
     return render(request,
         "principal.html",
     )
+
 

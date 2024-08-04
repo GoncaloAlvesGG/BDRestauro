@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'BDRestauro',
     'bootstrap5',
-    'crispy_forms',
+    'sweetify'
 ]
 
 MIDDLEWARE = [
@@ -130,4 +130,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CRISPY_TEMPLATE_PACK = 'bootstrap5'
+SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'

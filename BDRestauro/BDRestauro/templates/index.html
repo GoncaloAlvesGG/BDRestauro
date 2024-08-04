@@ -3,12 +3,15 @@
 
 <head>
     <title>Página Inicial</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
 </head>  
 
 <body>
     <div class="container   
  mt-5">
-        <a href="{% url 'lista_utilizadores' %}" class="btn btn-primary">Listar Utilizadores</a>
+        <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
     </div>
 
 </body>
