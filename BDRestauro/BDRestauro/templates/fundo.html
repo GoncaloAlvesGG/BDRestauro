@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AutoRestauro{% endblock %}</title>
+    <style>
+        body {
+            background-image: url("{% static 'assets/bg.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+    </style>
+    {% block extra_styles %}
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% endblock %}
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+    <div class="container-fluid mt-5" style="max-width: 85%;">
+        <div class="card">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+    {% block extra_scripts %}
+    {% bootstrap_javascript %}
+    {% endblock %}
+</body>
+
+</html>

@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .utils import *
-import sweetify
+from django.contrib.auth.decorators import login_required
+
+@login_required(login_url='/login/')
 
 def index(request):
     return render(request, 'index.html')
@@ -26,7 +28,6 @@ def register(request):
         return render(request, 'register.html')
 
 def register_user(request):
-    from django.shortcuts import render
     if request.method == 'POST':
         primeiro_nome = request.POST['primeiro_nome']
         ultimo_nome = request.POST['ultimo_nome']
@@ -91,6 +92,7 @@ def login_user(request):
 
 def logout_user(request):
     try:
+        request.session.flush()
         del request.session["id_utilizador"]
         del request.session["nome"]
         del request.session["admin"]
@@ -111,4 +113,20 @@ def principal(request):
         "principal.html",
     )
 
+def registar_entrada(request):
+    return render(request, 'registar_entrada.html')
 
+def consultar(request):
+    return render(request, 'consultar.html')
+
+def registar_saida(request):
+    return render(request, 'registar_saida.html')
+
+def veiculos(request):
+    return render(request, 'veiculos.html')
+
+def historico(request):
+    return render(request, 'historico.html')
+
+def conta(request):
+    return render(request, 'conta.html')

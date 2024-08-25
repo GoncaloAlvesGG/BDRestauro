@@ -1,42 +1,32 @@
-<!DOCTYPE html>
-<html>
+{% extends 'fundo.html' %}
 
-<head>
-    <title>Lista de Utilizadores</title>
-    {% load bootstrap5 %}
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
-</head>  
+{% block title %}Lista de Utilizadores{% endblock %}
 
-<body>
-    <div class="container   
- mt-5">
-        <h1>Lista de Utilizadores</h1>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Email</th>
-                    <th>Administrador</th>
-                    <th>Telemóvel</th>
-                    <th>NIF</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for utilizador in utilizadores %}
-                <tr>
-                    <td>{{ utilizador.id_utilizador}}</td>
-                    <td>{{ utilizador.primeiro_nome}} {{ utilizador.ultimo_nome }}</td>
-                    <td>{{ utilizador.email }}</td>
-                    <td>{{ utilizador.admin|yesno:"Sim,Não" }}</td>
-                    <td>{{ utilizador.telemovel }}</td>
-                    <td>{{ utilizador.nif }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</body>
-
-</html>  
+{% block content %}
+<h1 class="text-center mt-2">Lista de Utilizadores</h1>
+<p>
+<table class="table table-striped text-center">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Administrador</th>
+            <th>Telemóvel</th>
+            <th>NIF</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for utilizador in utilizadores %}
+        <tr>
+            <td>{{ utilizador.id_utilizador }}</td>
+            <td>{{ utilizador.primeiro_nome }} {{ utilizador.ultimo_nome }}</td>
+            <td>{{ utilizador.email }}</td>
+            <td>{{ utilizador.admin|yesno:"Sim,Não" }}</td>
+            <td>{{ utilizador.telemovel }}</td>
+            <td>{{ utilizador.nif }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

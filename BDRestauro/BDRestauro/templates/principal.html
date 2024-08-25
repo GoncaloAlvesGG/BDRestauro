@@ -1,34 +1,15 @@
-<!DOCTYPE html>
-<html>
+{% extends 'fundo.html' %}
 
-<head>
-    <title>Página Inicial</title>
-    {% load bootstrap5 %}
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
-    {% load sweetify %}
-    {% sweetify %}
-    {% load static %}
-</head>  
+{% block title %}Página Inicial{% endblock %}
 
-<body>
-    <div class="container   
- mt-5">
-        <h1> PRINCIPAL</h1>
-        {% if messages %}
-        <div class="alert alert-danger mt-3">
-            {% for message in messages %}
-            {{ message }}
-            {% endfor %}
-        </div>
-        {% endif %}
-        <div class="container   
- mt-5">
-            <a href="{% url 'lista_utilizadores' %}" class="btn btn-primary">Listar Utilizadores</a>
-            <a href="{% url 'logout' %}" class="btn btn-primary">Sair</a>
-        </div>
-    </div>
-</body>
-
-
-</html>  
+{% block content %}
+<h1 class="text-center mt-2">Dashboard</h1>
+{% if messages %}
+<div class="alert alert-danger mt-3">
+    {% for message in messages %}
+    {{ message }}
+    {% endfor %}
+</div>
+{% endif %}
+<!-- Any additional content can go here -->
+{% endblock %}

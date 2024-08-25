@@ -1,0 +1,80 @@
+{% load static %}
+{% load custom_filters %}
+
+<style>
+    /* Add a gap above the navbar */
+    .navbar {
+        margin-top: 25px !important;
+        max-width: 90%;
+        margin: auto;
+    }
+
+    /* Set the font size and make the text bold */
+    .navbar-brand,
+    .nav-link {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-right: 10px;
+        margin-left: 10px;
+        /* Add spacing between links */
+    }
+
+    .container-fluid {
+        max-width: 97%;
+    }
+
+    /* Optional: Customize the dropdown items' spacing as well */
+    .dropdown-item {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        /* Increase space between dropdown items */
+    }
+</style>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary rounded">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'assets/logo.png' %}" alt="Logo" width="96" height="72">
+        </a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                {% if request.session|get_session_value:'admin' %}
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'principal' %}">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'lista_utilizadores' %}">Clientes</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link active dropdown-toggle" data-bs-toggle="dropdown" id="veiculosDropdown"
+                        role="button" aria-haspopup="true" aria-expanded="false">
+                        Veículos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="veiculosDropdown">
+                        <a class="dropdown-item" href="{% url 'registar_entrada' %}">Registar Entrada</a>
+                        <a class="dropdown-item" href="{% url 'registar_saida' %}">Registar Saída</a>
+                        <a class="dropdown-item" href="{% url 'consultar' %}">Consultar</a>
+                        <a class="dropdown-item" href="{% url 'historico' %}">Histórico</a>
+                    </div>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'principal' %}">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'veiculos' %}">Os meus pedidos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'conta' %}">A minha conta</a>
+                </li>
+                {% endif %}
+            </ul>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'logout' %}">Sair</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
